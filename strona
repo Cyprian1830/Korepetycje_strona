@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EduKrok — Korepetycje z matematyki online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f2;
+    --text-primary: #1a1a18;
+    --text-secondary: #6b6b66;
+    --border: rgba(0,0,0,0.12);
+    --border-md: rgba(0,0,0,0.22);
+    --green: #1D9E75;
+    --green-dark: #0F6E56;
+    --green-darker: #085041;
+    --green-light: #E1F5EE;
+    --green-mid: #9FE1CB;
+    --green-str: #5DCAA5;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-primary);
+    background: #fafaf8;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  .ek-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 2rem;
+    border-bottom: 0.5px solid var(--border);
+    background: var(--bg-primary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .ek-logo { display: flex; align-items: center; gap: 10px; }
+
+  .ek-logo-icon {
+    width: 36px; height: 36px;
+    background: var(--green);
+    border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 18px;
+  }
+
+  .ek-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700; letter-spacing: -0.3px;
+  }
+  .ek-logo-text span { color: var(--green); }
+
+  .ek-tabs { display: flex; gap: 4px; }
+
+  .ek-tab {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px; font-weight: 400;
+    cursor: pointer; border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+  .ek-tab:hover { background: var(--bg-secondary); color: var(--text-primary); }
+  .ek-tab.active { background: var(--green-light); color: var(--green-dark); font-weight: 500; }
+
+  /* SECTIONS */
+  .ek-section { display: none; padding: 0 2rem 3rem; max-width: 900px; margin: 0 auto; }
+  .ek-section.visible { display: block; }
+
+  /* HERO */
+  .ek-hero {
+    padding: 3.5rem 0 2.5rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2.5rem; align-items: center;
+  }
+
+  .ek-hero-eyebrow {
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--green);
+    font-weight: 500; margin-bottom: 0.75rem;
+  }
+
+  .ek-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px; line-height: 1.18;
+    font-weight: 700; margin-bottom: 1rem;
+  }
+  .ek-hero-title em { font-style: italic; color: var(--green); }
+
+  .ek-hero-sub {
+    font-size: 15px; line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem; font-weight: 300;
+  }
+
+  .ek-hero-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 22px;
+    background: var(--green); color: white;
+    border-radius: var(--radius-md);
+    font-size: 14px; font-weight: 500;
+    cursor: pointer; border: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.15s;
+  }
+  .ek-hero-cta:hover { background: var(--green-dark); }
+
+  .ek-hero-visual {
+    background: var(--green-light);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .ek-board-label {
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--green-dark); font-weight: 500;
+  }
+  .ek-board-line { height: 2px; background: var(--green-mid); border-radius: 2px; }
+  .ek-board-eq {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--green-darker);
+    text-align: center; padding: 0.75rem 0;
+  }
+  .ek-board-dots { display: flex; gap: 8px; }
+  .ek-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-str); }
+
+  .ek-features {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-top: 2.5rem;
+  }
+  .ek-feat {
+    background: var(--bg-secondary);
+    border-radius: 10px; padding: 1.1rem;
+  }
+  .ek-feat-icon { font-size: 22px; color: var(--green); margin-bottom: 8px; }
+  .ek-feat-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+  .ek-feat-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* SECTION HEADERS */
+  .ek-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700;
+    margin: 2.5rem 0 0.5rem;
+  }
+  .ek-section-sub { font-size: 14px; color: var(--text-secondary); margin-bottom: 2rem; }
+
+  /* OFERTA */
+  .ek-offer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+  .ek-offer-card {
+    background: var(--bg-primary);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1.4rem;
+  }
+  .ek-offer-card.featured { border: 2px solid var(--green); }
+
+  .ek-offer-badge {
+    display: inline-block;
+    background: var(--green-light); color: var(--green-dark);
+    font-size: 11px; font-weight: 500;
+    padding: 3px 10px; border-radius: 20px;
+    margin-bottom: 0.75rem;
+  }
+  .ek-offer-name { font-size: 17px; font-weight: 500; margin-bottom: 0.4rem; }
+  .ek-offer-desc {
+    font-size: 13px; color: var(--text-secondary);
+    line-height: 1.6; margin-bottom: 1rem;
+  }
+  .ek-offer-points { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .ek-offer-points li {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 12.5px; color: var(--text-secondary);
+  }
+  .ek-offer-points li i { color: var(--green); font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+
+  /* CENY */
+  .ek-price-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 2rem; }
+
+  .ek-price-card {
+    border-radius: 14px; padding: 2rem 1.5rem;
+    text-align: center;
+    border: 0.5px solid var(--border);
+    background: var(--bg-primary);
+  }
+  .ek-price-card.highlight { background: var(--green-light); border-color: var(--green-mid); }
+
+  .ek-price-level {
+    font-size: 12px; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--green); font-weight: 500; margin-bottom: 0.5rem;
+  }
+  .ek-price-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px; font-weight: 700;
+    color: var(--green-darker); line-height: 1;
+  }
+  .ek-price-unit { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+  .ek-price-tag { font-size: 12px; color: var(--green-dark); margin-top: 0.75rem; font-weight: 500; }
+
+  .ek-price-note {
+    margin-top: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 10px; padding: 1rem 1.25rem;
+    font-size: 13px; color: var(--text-secondary);
+    line-height: 1.6; text-align: center;
+  }
+
+  /* O NAS */
+  .ek-about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+  .ek-about-text { font-size: 14px; line-height: 1.8; color: var(--text-secondary); }
+  .ek-about-text p { margin-bottom: 1rem; }
+
+  .ek-stat-group { display: flex; flex-direction: column; gap: 12px; }
+  .ek-stat {
+    background: var(--bg-secondary);
+    border-radius: 10px; padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .ek-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; font-weight: 700;
+    color: var(--green); min-width: 70px;
+  }
+  .ek-stat-label { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+
+  .ek-team-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; margin: 2.5rem 0 1rem;
+  }
+  .ek-team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .ek-team-card {
+    background: var(--bg-secondary); border-radius: 10px;
+    padding: 1.2rem; text-align: center;
+  }
+  .ek-team-avatar {
+    width: 50px; height: 50px; border-radius: 50%;
+    background: var(--green); color: white;
+    font-weight: 500; font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 0.75rem;
+  }
+  .ek-team-name { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+  .ek-team-spec { font-size: 12px; color: var(--text-secondary); }
+
+  /* KONTAKT */
+  .ek-contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+  .ek-contact-info { display: flex; flex-direction: column; gap: 16px; }
+  .ek-contact-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 1rem; background: var(--bg-secondary); border-radius: 10px;
+  }
+  .ek-contact-icon { font-size: 20px; color: var(--green); margin-top: 1px; flex-shrink: 0; }
+  .ek-contact-label {
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--text-secondary); margin-bottom: 3px;
+  }
+  .ek-contact-val { font-size: 14px; font-weight: 500; }
+
+  .ek-contact-form { display: flex; flex-direction: column; gap: 12px; }
+  .ek-form-row { display: flex; flex-direction: column; gap: 5px; }
+  .ek-form-label { font-size: 12px; color: var(--text-secondary); }
+  .ek-form-input, .ek-form-select, .ek-form-textarea {
+    padding: 9px 12px;
+    border: 0.5px solid var(--border-md);
+    border-radius: var(--radius-md);
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+    background: var(--bg-primary); color: var(--text-primary); width: 100%;
+    outline: none; transition: border-color 0.15s;
+  }
+  .ek-form-input:focus, .ek-form-select:focus, .ek-form-textarea:focus {
+    border-color: var(--green);
+  }
+  .ek-form-textarea { resize: vertical; min-height: 90px; }
+
+  .ek-submit {
+    padding: 10px; background: var(--green); color: white;
+    border: none; border-radius: var(--radius-md);
+    font-size: 14px; font-weight: 500; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: background 0.15s;
+  }
+  .ek-submit:hover { background: var(--green-dark); }
+
+  .ek-footer {
+    text-align: center; padding: 1.5rem 2rem;
+    border-top: 0.5px solid var(--border);
+    font-size: 12px; color: var(--text-secondary); margin-top: 1rem;
+    max-width: 900px; margin: 1rem auto 0;
+  }
+</style>
+</head>
+<body>
+
+<nav class="ek-nav">
+  <div class="ek-logo">
+    <div class="ek-logo-icon"><i class="ti ti-math"></i></div>
+    <div class="ek-logo-text">Edu<span>Krok</span></div>
+  </div>
+  <div class="ek-tabs">
+    <button class="ek-tab active" onclick="switchTab('home')">Strona główna</button>
+    <button class="ek-tab" onclick="switchTab('oferta')">Oferta</button>
+    <button class="ek-tab" onclick="switchTab('ceny')">Cennik</button>
+    <button class="ek-tab" onclick="switchTab('onas')">O nas</button>
+    <button class="ek-tab" onclick="switchTab('kontakt')">Kontakt</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<section id="tab-home" class="ek-section visible">
+  <div class="ek-hero">
+    <div>
+      <div class="ek-hero-eyebrow">Korepetycje online · Matematyka</div>
+      <h1 class="ek-hero-title">Każdy krok<br>do <em>sukcesu</em><br>z EduKrok</h1>
+      <p class="ek-hero-sub">Profesjonalna grupa korepetytorów, która przygotuje Cię do matury, egzaminu ósmoklasisty lub po prostu poprawi oceny. Zajęcia online na interaktywnej tablicy.</p>
+      <button class="ek-hero-cta" onclick="switchTab('kontakt')">
+        Umów pierwszą lekcję <i class="ti ti-arrow-right"></i>
+      </button>
+    </div>
+    <div class="ek-hero-visual">
+      <div class="ek-board-label"><i class="ti ti-writing" style="margin-right:4px"></i>Tablica interaktywna</div>
+      <div class="ek-board-line"></div>
+      <div class="ek-board-eq">∫₀¹ x² dx = ⅓</div>
+      <div style="font-family:'DM Sans';font-size:13px;color:#0F6E56;text-align:center;padding-bottom:0.25rem">Granica · Pochodna · Całka</div>
+      <div class="ek-board-line"></div>
+      <div class="ek-board-dots">
+        <div class="ek-dot"></div><div class="ek-dot"></div><div class="ek-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ek-features">
+    <div class="ek-feat">
+      <div class="ek-feat-icon"><i class="ti ti-device-laptop"></i></div>
+      <div class="ek-feat-title">W pełni online</div>
+      <div class="ek-feat-desc">Zajęcia na nowoczesnej tablicy interaktywnej — wygodnie z domu.</div>
+    </div>
+    <div class="ek-feat">
+      <div class="ek-feat-icon"><i class="ti ti-users"></i></div>
+      <div class="ek-feat-title">Zespół ekspertów</div>
+      <div class="ek-feat-desc">Doświadczeni korepetytorzy z pasją do matematyki i nauczania.</div>
+    </div>
+    <div class="ek-feat">
+      <div class="ek-feat-icon"><i class="ti ti-target"></i></div>
+      <div class="ek-feat-title">Cel: wyniki</div>
+      <div class="ek-feat-desc">Indywidualne podejście i plan działania dopasowany do ucznia.</div>
+    </div>
+    <div class="ek-feat">
+      <div class="ek-feat-icon"><i class="ti ti-school"></i></div>
+      <div class="ek-feat-title">Matura i nie tylko</div>
+      <div class="ek-feat-desc">Rozszerzona, podstawowa, egzamin ósmoklasisty, bieżące sprawdziany.</div>
+    </div>
+    <div class="ek-feat">
+      <div class="ek-feat-icon"><i class="ti ti-calendar-check"></i></div>
+      <div class="ek-feat-title">Elastyczny grafik</div>
+      <div class="ek-feat-desc">Terminy dopasowane do Twojego planu zajęć szkolnych.</div>
+    </div>
+    <div class="ek-feat">
+      <div class="ek-feat-icon"><i class="ti ti-trending-up"></i></div>
+      <div class="ek-feat-title">Szybkie postępy</div>
+      <div class="ek-feat-desc">Metody sprawdzone w setce przygotowań do egzaminów.</div>
+    </div>
+  </div>
+</section>
+
+<!-- OFERTA -->
+<section id="tab-oferta" class="ek-section">
+  <h2 class="ek-section-title">Nasza oferta</h2>
+  <p class="ek-section-sub">Dostosowujemy zakres materiału do etapu edukacji i potrzeb ucznia.</p>
+  <div class="ek-offer-grid">
+    <div class="ek-offer-card featured">
+      <div class="ek-offer-badge">Najpopularniejsze</div>
+      <div class="ek-offer-name">Matura rozszerzona</div>
+      <div class="ek-offer-desc">Kompleksowe przygotowanie do matury z matematyki na poziomie rozszerzonym. Zadania otwarte, dowody, rachunki całkowe.</div>
+      <ul class="ek-offer-points">
+        <li><i class="ti ti-check"></i>Pełny zakres podstawy programowej</li>
+        <li><i class="ti ti-check"></i>Rozwiązywanie arkuszy z poprzednich lat</li>
+        <li><i class="ti ti-check"></i>Strategie zarządzania czasem na egzaminie</li>
+        <li><i class="ti ti-check"></i>Korekta najczęstszych błędów</li>
+      </ul>
+    </div>
+    <div class="ek-offer-card">
+      <div class="ek-offer-badge">Solidna podstawa</div>
+      <div class="ek-offer-name">Matura podstawowa</div>
+      <div class="ek-offer-desc">Pewne opanowanie materiału wymaganego na maturze podstawowej. Skupiamy się na technikach i pewności siebie.</div>
+      <ul class="ek-offer-points">
+        <li><i class="ti ti-check"></i>Systematyzacja materiału</li>
+        <li><i class="ti ti-check"></i>Ćwiczenia na arkuszach CKE</li>
+        <li><i class="ti ti-check"></i>Trening zadań zamkniętych</li>
+        <li><i class="ti ti-check"></i>Praca nad słabymi obszarami</li>
+      </ul>
+    </div>
+    <div class="ek-offer-card">
+      <div class="ek-offer-badge">Klasy 1–8</div>
+      <div class="ek-offer-name">Egzamin ósmoklasisty</div>
+      <div class="ek-offer-desc">Staranne przygotowanie do egzaminu po klasie 8. Budujemy pewność w zakresie całej szkoły podstawowej.</div>
+      <ul class="ek-offer-points">
+        <li><i class="ti ti-check"></i>Powtórzenie całego zakresu SP</li>
+        <li><i class="ti ti-check"></i>Praca na arkuszach próbnych</li>
+        <li><i class="ti ti-check"></i>Przyjazna metoda tłumaczenia</li>
+        <li><i class="ti ti-check"></i>Motywacja i eliminacja tremy</li>
+      </ul>
+    </div>
+    <div class="ek-offer-card">
+      <div class="ek-offer-badge">Na bieżąco</div>
+      <div class="ek-offer-name">Sprawdziany i kartkówki</div>
+      <div class="ek-offer-desc">Szybka pomoc przed konkretnym sprawdzianem lub kartkówką oraz praca nad poprawieniem ocen w trakcie roku szkolnego.</div>
+      <ul class="ek-offer-points">
+        <li><i class="ti ti-check"></i>Intensywne powtórki przed testem</li>
+        <li><i class="ti ti-check"></i>Wyjaśnienie niezrozumiałego materiału</li>
+        <li><i class="ti ti-check"></i>Odrabianie zaległości</li>
+        <li><i class="ti ti-check"></i>Poprawa ocen semestralnych</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CENY -->
+<section id="tab-ceny" class="ek-section">
+  <h2 class="ek-section-title">Cennik</h2>
+  <p class="ek-section-sub">Przejrzyste ceny, bez ukrytych opłat. Jedna lekcja trwa 55 minut.</p>
+  <div class="ek-price-grid">
+    <div class="ek-price-card highlight">
+      <div class="ek-price-level">Poziom rozszerzony</div>
+      <div class="ek-price-amount">100 zł</div>
+      <div class="ek-price-unit">za 55 minut</div>
+      <div class="ek-price-tag">Matura rozszerzona</div>
+    </div>
+    <div class="ek-price-card">
+      <div class="ek-price-level">Poziom podstawowy</div>
+      <div class="ek-price-amount">90 zł</div>
+      <div class="ek-price-unit">za 55 minut</div>
+      <div class="ek-price-tag">Matura podstawowa · Egzamin ósmoklasisty</div>
+    </div>
+  </div>
+  <div class="ek-price-note">
+    <i class="ti ti-info-circle" style="color:#1D9E75;font-size:16px;vertical-align:-2px;margin-right:6px"></i>
+    Cena obejmuje zajęcia na interaktywnej tablicy online, materiały i zadania do samodzielnej pracy. Pierwsza lekcja pozwala nam razem ocenić poziom i zaplanować dalszą współpracę.
+  </div>
+</section>
+
+<!-- O NAS -->
+<section id="tab-onas" class="ek-section">
+  <h2 class="ek-section-title">O nas</h2>
+  <p class="ek-section-sub">Jesteśmy zespołem z prawdziwą pasją do nauczania matematyki.</p>
+  <div class="ek-about-grid">
+    <div class="ek-about-text">
+      <p>EduKrok to grupa profesjonalnych korepetytorów matematyki, którzy łączą wiedzę merytoryczną z umiejętnością tłumaczenia nawet najtrudniejszych zagadnień w przystępny sposób.</p>
+      <p>Nasze zajęcia odbywają się w całości online, na nowoczesnej tablicy interaktywnej. Dzięki temu uczeń ma pełen komfort nauki z domu, a my możemy w czasie rzeczywistym pisać, rysować wykresy i wspólnie rozwiązywać zadania.</p>
+      <p>Wierzymy, że każdy uczeń może osiągnąć swój cel — potrzeba tylko odpowiedniego wsparcia, cierpliwości i dobrego planu. To właśnie oferujemy.</p>
+    </div>
+    <div class="ek-stat-group">
+      <div class="ek-stat">
+        <div class="ek-stat-num">100%</div>
+        <div class="ek-stat-label">zajęć prowadzonych<br>na tablicy interaktywnej</div>
+      </div>
+      <div class="ek-stat">
+        <div class="ek-stat-num">4+</div>
+        <div class="ek-stat-label">poziomy kształcenia<br>w jednym miejscu</div>
+      </div>
+      <div class="ek-stat">
+        <div class="ek-stat-num">55 min</div>
+        <div class="ek-stat-label">pełna lekcja,<br>bez skracania czasu</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ek-team-title">Nasz zespół</div>
+  <div class="ek-team-grid">
+    <div class="ek-team-card">
+      <div class="ek-team-avatar">MK</div>
+      <div class="ek-team-name">Marek K.</div>
+      <div class="ek-team-spec">Matura rozszerzona</div>
+    </div>
+    <div class="ek-team-card">
+      <div class="ek-team-avatar">AN</div>
+      <div class="ek-team-name">Anna N.</div>
+      <div class="ek-team-spec">Matura podstawowa</div>
+    </div>
+    <div class="ek-team-card">
+      <div class="ek-team-avatar">TW</div>
+      <div class="ek-team-name">Tomasz W.</div>
+      <div class="ek-team-spec">Egzamin ósmoklasisty</div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="tab-kontakt" class="ek-section">
+  <h2 class="ek-section-title">Kontakt</h2>
+  <p class="ek-section-sub">Napisz do nas — odezwiemy się w ciągu 24 godzin.</p>
+  <div class="ek-contact-wrap">
+    <div class="ek-contact-info">
+      <div class="ek-contact-item">
+        <i class="ti ti-mail ek-contact-icon"></i>
+        <div>
+          <div class="ek-contact-label">E-mail</div>
+          <div class="ek-contact-val">kontakt@edukrok.pl</div>
+        </div>
+      </div>
+      <div class="ek-contact-item">
+        <i class="ti ti-device-mobile ek-contact-icon"></i>
+        <div>
+          <div class="ek-contact-label">Telefon / WhatsApp</div>
+          <div class="ek-contact-val">+48 500 000 000</div>
+        </div>
+      </div>
+      <div class="ek-contact-item">
+        <i class="ti ti-device-laptop ek-contact-icon"></i>
+        <div>
+          <div class="ek-contact-label">Forma zajęć</div>
+          <div class="ek-contact-val">Online — tablica interaktywna</div>
+        </div>
+      </div>
+      <div class="ek-contact-item">
+        <i class="ti ti-clock ek-contact-icon"></i>
+        <div>
+          <div class="ek-contact-label">Dostępność</div>
+          <div class="ek-contact-val">Pon–Sob, 8:00–20:00</div>
+        </div>
+      </div>
+    </div>
+    <div class="ek-contact-form">
+      <div class="ek-form-row">
+        <label class="ek-form-label">Imię i nazwisko ucznia</label>
+        <input class="ek-form-input" type="text" placeholder="np. Jan Kowalski" />
+      </div>
+      <div class="ek-form-row">
+        <label class="ek-form-label">Adres e-mail</label>
+        <input class="ek-form-input" type="email" placeholder="adres@email.com" />
+      </div>
+      <div class="ek-form-row">
+        <label class="ek-form-label">Czego potrzebujesz?</label>
+        <select class="ek-form-select">
+          <option value="">— wybierz —</option>
+          <option>Matura rozszerzona</option>
+          <option>Matura podstawowa</option>
+          <option>Egzamin ósmoklasisty</option>
+          <option>Sprawdzian / kartkówka</option>
+          <option>Poprawa ocen</option>
+        </select>
+      </div>
+      <div class="ek-form-row">
+        <label class="ek-form-label">Wiadomość (opcjonalnie)</label>
+        <textarea class="ek-form-textarea" placeholder="Opisz swoją sytuację, terminy, pytania..."></textarea>
+      </div>
+      <button class="ek-submit" onclick="alert('Dziękujemy! Odezwiemy się wkrótce.')">
+        Wyślij zgłoszenie <i class="ti ti-send"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="ek-footer">
+  © 2025 EduKrok · Korepetycje z matematyki online · kontakt@edukrok.pl
+</div>
+
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.ek-section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.ek-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('visible');
+  const tabs = ['home','oferta','ceny','onas','kontakt'];
+  const idx = tabs.indexOf(name);
+  document.querySelectorAll('.ek-tab')[idx].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
