@@ -1,575 +1,474 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>EduKrok — Korepetycje z matematyki online</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <title>EduKrok | Korepetycje z matematyki</title>
 
-:root {
-  --bg: #ffffff;
-  --bg2: #f5f5f2;
-  --text: #1a1a18;
-  --text2: #6b6b66;
-  --border: rgba(0,0,0,0.12);
-  --green: #1D9E75;
-  --green-dk: #0F6E56;
-  --green-dkr: #085041;
-  --green-lt: #E1F5EE;
-  --green-mid: #9FE1CB;
-  --green-str: #5DCAA5;
-}
+    <meta name="description" content="Profesjonalne korepetycje z matematyki online. Szkoła podstawowa, matura podstawowa i rozszerzona.">
 
-body {
-  font-family: 'DM Sans', Arial, sans-serif;
-  color: var(--text);
-  background: #fafaf8;
-  min-height: 100vh;
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-/* ── NAV ── */
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.1rem 2rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-.logo { display: flex; align-items: center; gap: 10px; }
-
-.logo-icon {
-  width: 36px; height: 36px;
-  background: var(--green);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  color: white; font-size: 18px; line-height: 1;
-}
-
-.logo-text {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 20px; font-weight: 700;
-}
-.logo-text span { color: var(--green); }
-
-.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
-
-.tab {
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-size: 13px;
-  cursor: pointer; border: none;
-  background: transparent;
-  color: var(--text2);
-  font-family: 'DM Sans', Arial, sans-serif;
-  transition: all 0.15s;
-}
-.tab:hover { background: var(--bg2); color: var(--text); }
-.tab.active { background: var(--green-lt); color: var(--green-dk); font-weight: 500; }
-
-/* ── SECTIONS ── */
-.sec { display: none; padding: 0 2rem 3rem; max-width: 900px; margin: 0 auto; }
-.sec.on { display: block; }
-
-/* ── HERO ── */
-.hero {
-  padding: 3.5rem 0 2.5rem;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 2.5rem; align-items: center;
-}
-
-.eyebrow {
-  font-size: 11px; text-transform: uppercase;
-  letter-spacing: 1.5px; color: var(--green);
-  font-weight: 500; margin-bottom: 0.75rem;
-}
-
-h1 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 38px; line-height: 1.18;
-  font-weight: 700; margin-bottom: 1rem;
-}
-h1 em { font-style: italic; color: var(--green); }
-
-.hero-sub {
-  font-size: 15px; line-height: 1.7;
-  color: var(--text2); margin-bottom: 1.5rem; font-weight: 300;
-}
-
-.btn-cta {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 22px;
-  background: var(--green); color: white;
-  border-radius: 8px;
-  font-size: 14px; font-weight: 500;
-  cursor: pointer; border: none;
-  font-family: 'DM Sans', Arial, sans-serif;
-  transition: background 0.15s;
-}
-.btn-cta:hover { background: var(--green-dk); }
-
-.board {
-  background: var(--green-lt);
-  border-radius: 16px; padding: 2rem;
-  display: flex; flex-direction: column; gap: 10px;
-}
-.board-label {
-  font-size: 11px; text-transform: uppercase;
-  letter-spacing: 1px; color: var(--green-dk); font-weight: 500;
-}
-.board-line { height: 2px; background: var(--green-mid); border-radius: 2px; }
-.board-eq {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 24px; color: var(--green-dkr);
-  text-align: center; padding: 0.75rem 0;
-}
-.board-sub { font-size: 13px; color: var(--green-dk); text-align: center; padding-bottom: 0.25rem; }
-.dots { display: flex; gap: 8px; }
-.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-str); }
-
-/* ── FEATURES GRID ── */
-.feat-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 12px; margin-top: 2.5rem;
-}
-.feat {
-  background: var(--bg2); border-radius: 10px; padding: 1.1rem;
-}
-.feat-icon { font-size: 22px; margin-bottom: 8px; }
-.feat-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
-.feat-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
-
-/* ── SECTION HEADERS ── */
-.sec-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 28px; font-weight: 700; margin: 2.5rem 0 0.5rem;
-}
-.sec-sub { font-size: 14px; color: var(--text2); margin-bottom: 2rem; }
-
-/* ── OFERTA ── */
-.offer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-
-.offer-card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 12px; padding: 1.4rem;
-}
-.offer-card.star { border: 2px solid var(--green); }
-
-.badge {
-  display: inline-block;
-  background: var(--green-lt); color: var(--green-dk);
-  font-size: 11px; font-weight: 500;
-  padding: 3px 10px; border-radius: 20px;
-  margin-bottom: 0.75rem;
-}
-.offer-name { font-size: 17px; font-weight: 500; margin-bottom: 0.4rem; }
-.offer-desc {
-  font-size: 13px; color: var(--text2);
-  line-height: 1.6; margin-bottom: 1rem;
-}
-.points { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.points li {
-  display: flex; align-items: flex-start; gap: 8px;
-  font-size: 12.5px; color: var(--text2);
-}
-.chk { color: var(--green); font-size: 14px; flex-shrink: 0; margin-top: 1px; }
-
-/* ── CENY ── */
-.price-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 2rem; }
-
-.price-card {
-  border-radius: 14px; padding: 2rem 1.5rem;
-  text-align: center;
-  border: 1px solid var(--border);
-  background: var(--bg);
-}
-.price-card.hl { background: var(--green-lt); border-color: var(--green-mid); }
-
-.p-level {
-  font-size: 12px; text-transform: uppercase;
-  letter-spacing: 1px; color: var(--green); font-weight: 500; margin-bottom: 0.5rem;
-}
-.p-amount {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 48px; font-weight: 700;
-  color: var(--green-dkr); line-height: 1;
-}
-.p-unit { font-size: 13px; color: var(--text2); margin-top: 4px; }
-.p-tag { font-size: 12px; color: var(--green-dk); margin-top: 0.75rem; font-weight: 500; }
-
-.price-note {
-  margin-top: 1.5rem;
-  background: var(--bg2); border-radius: 10px;
-  padding: 1rem 1.25rem;
-  font-size: 13px; color: var(--text2);
-  line-height: 1.6; text-align: center;
-}
-
-/* ── O NAS ── */
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
-.about-text { font-size: 14px; line-height: 1.8; color: var(--text2); }
-.about-text p { margin-bottom: 1rem; }
-
-.stat-group { display: flex; flex-direction: column; gap: 12px; }
-.stat {
-  background: var(--bg2); border-radius: 10px;
-  padding: 1rem 1.25rem;
-  display: flex; align-items: center; gap: 14px;
-}
-.stat-num {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 28px; font-weight: 700;
-  color: var(--green); min-width: 70px;
-}
-.stat-label { font-size: 13px; color: var(--text2); line-height: 1.4; }
-
-.team-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 22px; font-weight: 700; margin: 2.5rem 0 1rem;
-}
-.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.team-card {
-  background: var(--bg2); border-radius: 10px;
-  padding: 1.2rem; text-align: center;
-}
-.avatar {
-  width: 50px; height: 50px; border-radius: 50%;
-  background: var(--green); color: white;
-  font-weight: 500; font-size: 16px;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 0.75rem;
-}
-.team-name { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
-.team-spec { font-size: 12px; color: var(--text2); }
-
-/* ── KONTAKT ── */
-.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
-.contact-info { display: flex; flex-direction: column; gap: 16px; }
-.c-item {
-  display: flex; align-items: flex-start; gap: 14px;
-  padding: 1rem; background: var(--bg2); border-radius: 10px;
-}
-.c-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-.c-label {
-  font-size: 11px; text-transform: uppercase;
-  letter-spacing: 1px; color: var(--text2); margin-bottom: 3px;
-}
-.c-val { font-size: 14px; font-weight: 500; }
-
-.contact-form { display: flex; flex-direction: column; gap: 12px; }
-.form-row { display: flex; flex-direction: column; gap: 5px; }
-.form-label { font-size: 12px; color: var(--text2); }
-input[type=text], input[type=email], select, textarea {
-  padding: 9px 12px;
-  border: 1px solid rgba(0,0,0,0.22);
-  border-radius: 8px;
-  font-family: 'DM Sans', Arial, sans-serif; font-size: 13px;
-  background: var(--bg); color: var(--text); width: 100%;
-  outline: none; transition: border-color 0.15s;
-}
-input[type=text]:focus, input[type=email]:focus, select:focus, textarea:focus {
-  border-color: var(--green);
-}
-textarea { resize: vertical; min-height: 90px; }
-
-.btn-submit {
-  padding: 10px; background: var(--green); color: white;
-  border: none; border-radius: 8px;
-  font-size: 14px; font-weight: 500; cursor: pointer;
-  font-family: 'DM Sans', Arial, sans-serif;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  transition: background 0.15s;
-}
-.btn-submit:hover { background: var(--green-dk); }
-
-/* ── FOOTER ── */
-footer {
-  text-align: center; padding: 1.5rem 2rem;
-  border-top: 1px solid var(--border);
-  font-size: 12px; color: var(--text2);
-  margin-top: 1rem;
-}
-</style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<nav class="nav">
-  <div class="logo">
-    <div class="logo-icon">∑</div>
-    <div class="logo-text">Edu<span>Krok</span></div>
-  </div>
-  <div class="tabs">
-    <button class="tab active" onclick="go('home')">Strona główna</button>
-    <button class="tab" onclick="go('oferta')">Oferta</button>
-    <button class="tab" onclick="go('ceny')">Cennik</button>
-    <button class="tab" onclick="go('onas')">O nas</button>
-    <button class="tab" onclick="go('kontakt')">Kontakt</button>
-  </div>
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="container nav-content">
+
+        <a href="#" class="logo">
+
+            <img src="images/edukrok-logo.png" alt="EduKrok">
+
+            <span>EduKrok</span>
+
+        </a>
+
+        <ul class="nav-links">
+
+            <li><a href="#offer">Oferta</a></li>
+
+            <li><a href="#prices">Cennik</a></li>
+
+            <li><a href="#about">Dlaczego my?</a></li>
+
+            <li><a href="#contact">Kontakt</a></li>
+
+        </ul>
+
+        <div class="nav-buttons">
+
+            <a href="login.html" class="btn btn-outline">
+                Zaloguj się
+            </a>
+
+            <a href="register.html" class="btn btn-primary">
+                Załóż konto
+            </a>
+
+        </div>
+
+    </div>
+
 </nav>
 
-<!-- ══ HOME ══ -->
-<section id="s-home" class="sec on">
-  <div class="hero">
-    <div>
-      <div class="eyebrow">Korepetycje online · Matematyka</div>
-      <h1>Każdy krok<br>do <em>sukcesu</em><br>z EduKrok</h1>
-      <p class="hero-sub">Profesjonalna grupa korepetytorów, która przygotuje Cię do matury, egzaminu ósmoklasisty lub po prostu poprawi oceny. Zajęcia online na interaktywnej tablicy.</p>
-      <button class="btn-cta" onclick="go('kontakt')">Umów pierwszą lekcję →</button>
-    </div>
-    <div class="board">
-      <div class="board-label">✏️ Tablica interaktywna</div>
-      <div class="board-line"></div>
-      <div class="board-eq">∫₀¹ x² dx = ⅓</div>
-      <div class="board-sub">Granica · Pochodna · Całka</div>
-      <div class="board-line"></div>
-      <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-    </div>
-  </div>
+<!-- ================= HERO ================= -->
 
-  <div class="feat-grid">
-    <div class="feat">
-      <div class="feat-icon">💻</div>
-      <div class="feat-title">W pełni online</div>
-      <div class="feat-desc">Zajęcia na nowoczesnej tablicy interaktywnej — wygodnie z domu.</div>
-    </div>
-    <div class="feat">
-      <div class="feat-icon">👥</div>
-      <div class="feat-title">Zespół ekspertów</div>
-      <div class="feat-desc">Doświadczeni korepetytorzy z pasją do matematyki i nauczania.</div>
-    </div>
-    <div class="feat">
-      <div class="feat-icon">🎯</div>
-      <div class="feat-title">Cel: wyniki</div>
-      <div class="feat-desc">Indywidualne podejście i plan działania dopasowany do ucznia.</div>
-    </div>
-    <div class="feat">
-      <div class="feat-icon">🎓</div>
-      <div class="feat-title">Matura i nie tylko</div>
-      <div class="feat-desc">Rozszerzona, podstawowa, egzamin ósmoklasisty, bieżące sprawdziany.</div>
-    </div>
-    <div class="feat">
-      <div class="feat-icon">📅</div>
-      <div class="feat-title">Elastyczny grafik</div>
-      <div class="feat-desc">Terminy dopasowane do Twojego planu zajęć szkolnych.</div>
-    </div>
-    <div class="feat">
-      <div class="feat-icon">📈</div>
-      <div class="feat-title">Szybkie postępy</div>
-      <div class="feat-desc">Metody sprawdzone w setce przygotowań do egzaminów.</div>
-    </div>
-  </div>
-</section>
+<section class="hero">
 
-<!-- ══ OFERTA ══ -->
-<section id="s-oferta" class="sec">
-  <h2 class="sec-title">Nasza oferta</h2>
-  <p class="sec-sub">Dostosowujemy zakres materiału do etapu edukacji i potrzeb ucznia.</p>
-  <div class="offer-grid">
-    <div class="offer-card star">
-      <div class="badge">⭐ Najpopularniejsze</div>
-      <div class="offer-name">Matura rozszerzona</div>
-      <div class="offer-desc">Kompleksowe przygotowanie do matury z matematyki na poziomie rozszerzonym. Zadania otwarte, dowody, rachunki całkowe.</div>
-      <ul class="points">
-        <li><span class="chk">✓</span>Pełny zakres podstawy programowej</li>
-        <li><span class="chk">✓</span>Rozwiązywanie arkuszy z poprzednich lat</li>
-        <li><span class="chk">✓</span>Strategie zarządzania czasem na egzaminie</li>
-        <li><span class="chk">✓</span>Korekta najczęstszych błędów</li>
-      </ul>
-    </div>
-    <div class="offer-card">
-      <div class="badge">📚 Solidna podstawa</div>
-      <div class="offer-name">Matura podstawowa</div>
-      <div class="offer-desc">Pewne opanowanie materiału wymaganego na maturze podstawowej. Skupiamy się na technikach i pewności siebie.</div>
-      <ul class="points">
-        <li><span class="chk">✓</span>Systematyzacja materiału</li>
-        <li><span class="chk">✓</span>Ćwiczenia na arkuszach CKE</li>
-        <li><span class="chk">✓</span>Trening zadań zamkniętych</li>
-        <li><span class="chk">✓</span>Praca nad słabymi obszarami</li>
-      </ul>
-    </div>
-    <div class="offer-card">
-      <div class="badge">🏫 Klasy 1–8</div>
-      <div class="offer-name">Egzamin ósmoklasisty</div>
-      <div class="offer-desc">Staranne przygotowanie do egzaminu po klasie 8. Budujemy pewność w zakresie całej szkoły podstawowej.</div>
-      <ul class="points">
-        <li><span class="chk">✓</span>Powtórzenie całego zakresu SP</li>
-        <li><span class="chk">✓</span>Praca na arkuszach próbnych</li>
-        <li><span class="chk">✓</span>Przyjazna metoda tłumaczenia</li>
-        <li><span class="chk">✓</span>Motywacja i eliminacja tremy</li>
-      </ul>
-    </div>
-    <div class="offer-card">
-      <div class="badge">📝 Na bieżąco</div>
-      <div class="offer-name">Sprawdziany i kartkówki</div>
-      <div class="offer-desc">Szybka pomoc przed konkretnym sprawdzianem lub kartkówką oraz praca nad poprawieniem ocen w trakcie roku szkolnego.</div>
-      <ul class="points">
-        <li><span class="chk">✓</span>Intensywne powtórki przed testem</li>
-        <li><span class="chk">✓</span>Wyjaśnienie niezrozumiałego materiału</li>
-        <li><span class="chk">✓</span>Odrabianie zaległości</li>
-        <li><span class="chk">✓</span>Poprawa ocen semestralnych</li>
-      </ul>
-    </div>
-  </div>
-</section>
+    <div class="container hero-grid">
 
-<!-- ══ CENY ══ -->
-<section id="s-ceny" class="sec">
-  <h2 class="sec-title">Cennik</h2>
-  <p class="sec-sub">Przejrzyste ceny, bez ukrytych opłat. Jedna lekcja trwa 55 minut.</p>
-  <div class="price-grid">
-    <div class="price-card hl">
-      <div class="p-level">Poziom rozszerzony</div>
-      <div class="p-amount">100 zł</div>
-      <div class="p-unit">za 55 minut</div>
-      <div class="p-tag">Matura rozszerzona</div>
-    </div>
-    <div class="price-card">
-      <div class="p-level">Poziom podstawowy</div>
-      <div class="p-amount">90 zł</div>
-      <div class="p-unit">za 55 minut</div>
-      <div class="p-tag">Matura podstawowa · Egzamin ósmoklasisty</div>
-    </div>
-  </div>
-  <div class="price-note">
-    ℹ️ Cena obejmuje zajęcia na interaktywnej tablicy online, materiały i zadania do samodzielnej pracy. Pierwsza lekcja pozwala nam razem ocenić poziom i zaplanować dalszą współpracę.
-  </div>
-</section>
+        <div class="hero-left">
 
-<!-- ══ O NAS ══ -->
-<section id="s-onas" class="sec">
-  <h2 class="sec-title">O nas</h2>
-  <p class="sec-sub">Jesteśmy zespołem z prawdziwą pasją do nauczania matematyki.</p>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>EduKrok to grupa profesjonalnych korepetytorów matematyki, którzy łączą wiedzę merytoryczną z umiejętnością tłumaczenia nawet najtrudniejszych zagadnień w przystępny sposób.</p>
-      <p>Nasze zajęcia odbywają się w całości online, na nowoczesnej tablicy interaktywnej. Dzięki temu uczeń ma pełen komfort nauki z domu, a my możemy w czasie rzeczywistym pisać, rysować wykresy i wspólnie rozwiązywać zadania.</p>
-      <p>Wierzymy, że każdy uczeń może osiągnąć swój cel — potrzeba tylko odpowiedniego wsparcia, cierpliwości i dobrego planu. To właśnie oferujemy.</p>
-    </div>
-    <div class="stat-group">
-      <div class="stat">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">zajęć prowadzonych<br>na tablicy interaktywnej</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">4+</div>
-        <div class="stat-label">poziomy kształcenia<br>w jednym miejscu</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">55 min</div>
-        <div class="stat-label">pełna lekcja,<br>bez skracania czasu</div>
-      </div>
-    </div>
-  </div>
+            <span class="hero-badge">
 
-  <div class="team-title">Nasz zespół</div>
-  <div class="team-grid">
-    <div class="team-card">
-      <div class="avatar">MK</div>
-      <div class="team-name">Marek K.</div>
-      <div class="team-spec">Matura rozszerzona</div>
-    </div>
-    <div class="team-card">
-      <div class="avatar">AN</div>
-      <div class="team-name">Anna N.</div>
-      <div class="team-spec">Matura podstawowa</div>
-    </div>
-    <div class="team-card">
-      <div class="avatar">TW</div>
-      <div class="team-name">Tomasz W.</div>
-      <div class="team-spec">Egzamin ósmoklasisty</div>
-    </div>
-  </div>
-</section>
+                📚 EduKrok • Korepetycje Online
 
-<!-- ══ KONTAKT ══ -->
-<section id="s-kontakt" class="sec">
-  <h2 class="sec-title">Kontakt</h2>
-  <p class="sec-sub">Napisz do nas — odezwiemy się w ciągu 24 godzin.</p>
-  <div class="contact-wrap">
-    <div class="contact-info">
-      <div class="c-item">
-        <span class="c-icon">✉️</span>
-        <div>
-          <div class="c-label">E-mail</div>
-          <div class="c-val">kontakt@edukrok.pl</div>
+            </span>
+
+            <h1>
+
+                Matematyka,
+                która naprawdę
+                <span>przynosi efekty.</span>
+
+            </h1>
+
+            <p>
+
+                Indywidualne korepetycje z matematyki
+                dla uczniów szkoły podstawowej,
+                matury podstawowej oraz rozszerzonej.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="register.html"
+                   class="btn btn-primary">
+
+                    Umów pierwszą lekcję
+
+                </a>
+
+                <a href="#prices"
+                   class="btn btn-outline">
+
+                    Zobacz cennik
+
+                </a>
+
+            </div>
+
         </div>
-      </div>
-      <div class="c-item">
-        <span class="c-icon">📱</span>
-        <div>
-          <div class="c-label">Telefon / WhatsApp</div>
-          <div class="c-val">+48 500 000 000</div>
+
+        <div class="hero-right">
+
+            <div class="math-card">
+
+                <span class="math-label">
+
+                    Przykładowa lekcja
+
+                </span>
+
+<pre>
+
+f(x)=x²+2x+1
+
+Δ=b²−4ac
+
+∫x²dx=x³/3
+
+lim x→∞
+
+</pre>
+
+            </div>
+
         </div>
-      </div>
-      <div class="c-item">
-        <span class="c-icon">🖥️</span>
-        <div>
-          <div class="c-label">Forma zajęć</div>
-          <div class="c-val">Online — tablica interaktywna</div>
-        </div>
-      </div>
-      <div class="c-item">
-        <span class="c-icon">🕐</span>
-        <div>
-          <div class="c-label">Dostępność</div>
-          <div class="c-val">Pon–Sob, 8:00–20:00</div>
-        </div>
-      </div>
+
     </div>
-    <div class="contact-form">
-      <div class="form-row">
-        <label class="form-label">Imię i nazwisko ucznia</label>
-        <input type="text" placeholder="np. Jan Kowalski" />
-      </div>
-      <div class="form-row">
-        <label class="form-label">Adres e-mail</label>
-        <input type="email" placeholder="adres@email.com" />
-      </div>
-      <div class="form-row">
-        <label class="form-label">Czego potrzebujesz?</label>
-        <select>
-          <option value="">— wybierz —</option>
-          <option>Matura rozszerzona</option>
-          <option>Matura podstawowa</option>
-          <option>Egzamin ósmoklasisty</option>
-          <option>Sprawdzian / kartkówka</option>
-          <option>Poprawa ocen</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label class="form-label">Wiadomość (opcjonalnie)</label>
-        <textarea placeholder="Opisz swoją sytuację, terminy, pytania..."></textarea>
-      </div>
-      <button class="btn-submit" onclick="alert('Dziękujemy! Odezwiemy się wkrótce. 😊')">
-        Wyślij zgłoszenie ✈️
-      </button>
-    </div>
-  </div>
+
 </section>
 
-<footer>
-  © 2025 EduKrok · Korepetycje z matematyki online · kontakt@edukrok.pl
+<!-- ================= OFERTA ================= -->
+
+<section id="offer" class="section">
+
+<div class="container">
+
+<h2>
+
+Oferta EduKrok
+
+</h2>
+
+<p class="section-subtitle">
+
+Wybierz poziom dopasowany do siebie.
+
+</p>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>
+
+Szkoła podstawowa
+
+</h3>
+
+<p>
+
+Pomoc w bieżącej nauce, sprawdzianach
+oraz przygotowanie do egzaminu
+ósmoklasisty.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+Matura podstawowa
+
+</h3>
+
+<p>
+
+Kompleksowe przygotowanie do matury
+z naciskiem na zadania CKE.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+
+Matura rozszerzona
+
+</h3>
+
+<p>
+
+Zaawansowane zadania,
+dowody oraz pełne przygotowanie
+do studiów technicznych.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= CENNIK ================= -->
+
+<section id="prices" class="section grey">
+
+<div class="container">
+
+<h2>
+
+Cennik
+
+</h2>
+
+<div class="pricing">
+
+<div class="price-card">
+
+<h3>
+
+Szkoła podstawowa
+
+</h3>
+
+<div class="price">
+
+90 zł
+
+</div>
+
+<span>
+
+55 minut
+
+</span>
+
+</div>
+
+<div class="price-card featured">
+
+<h3>
+
+Matura podstawowa
+
+</h3>
+
+<div class="price">
+
+90 zł
+
+</div>
+
+<span>
+
+55 minut
+
+</span>
+
+</div>
+
+<div class="price-card">
+
+<h3>
+
+Matura rozszerzona
+
+</h3>
+
+<div class="price">
+
+100 zł
+
+</div>
+
+<span>
+
+55 minut
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= DLACZEGO MY ================= -->
+
+<section id="about" class="section">
+
+<div class="container">
+
+<h2>
+
+Dlaczego EduKrok?
+
+</h2>
+
+<div class="features">
+
+<div>
+
+🎯
+
+<h4>
+
+Indywidualne podejście
+
+</h4>
+
+</div>
+
+<div>
+
+💻
+
+<h4>
+
+Lekcje online
+
+</h4>
+
+</div>
+
+<div>
+
+📖
+
+<h4>
+
+Materiały PDF
+
+</h4>
+
+</div>
+
+<div>
+
+📈
+
+<h4>
+
+Szybkie postępy
+
+</h4>
+
+</div>
+
+<div>
+
+👨‍🏫
+
+<h4>
+
+Doświadczeni nauczyciele
+
+</h4>
+
+</div>
+
+<div>
+
+📅
+
+<h4>
+
+Elastyczne terminy
+
+</h4>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+<div class="container">
+
+<h2>
+
+Dołącz do EduKrok już dziś!
+
+</h2>
+
+<p>
+
+Załóż konto i zarezerwuj swoją pierwszą lekcję.
+
+</p>
+
+<a href="register.html"
+class="btn btn-primary">
+
+Rozpocznij
+
+</a>
+
+</div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer id="contact">
+
+<div class="container footer">
+
+<div>
+
+<h3>
+
+EduKrok
+
+</h3>
+
+<p>
+
+Profesjonalne korepetycje z matematyki online.
+
+</p>
+
+</div>
+
+<div>
+
+<p>
+
+kontakt@edukrok.pl
+
+</p>
+
+<p>
+
++48 XXX XXX XXX
+
+</p>
+
+</div>
+
+</div>
+
 </footer>
 
-<script>
-const IDS = ['home','oferta','ceny','onas','kontakt'];
-function go(name) {
-  IDS.forEach(id => {
-    document.getElementById('s-' + id).classList.remove('on');
-  });
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('s-' + name).classList.add('on');
-  document.querySelectorAll('.tab')[IDS.indexOf(name)].classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-</script>
+<script src="js/landing.js"></script>
+
 </body>
 </html>
